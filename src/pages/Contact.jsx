@@ -1,0 +1,19 @@
+import { useState } from 'react';
+import { Calendar, HeartPulse, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import SEO from '../components/SEO';
+import SectionTitle from '../components/SectionTitle';
+import { clinic } from '../data/siteData';
+
+const input = 'w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/20';
+
+export default function Contact() {
+  const [sent, setSent] = useState(false);
+  function submit(e) { e.preventDefault(); setSent(true); e.currentTarget.reset(); }
+  return (
+    <>
+      <SEO title="Contact Premium Pet Clinic Egypt" description="Contact Premium Pet Clinic: phone, WhatsApp, email, address, working hours, directions, booking, emergency CTA, and contact form." />
+      <section className="page-hero text-center"><div className="mx-auto max-w-5xl px-4"><span className="pill-gold">Contact</span><h1 className="mt-6 text-4xl font-black text-white md:text-6xl">Call, WhatsApp, book, or ask a question.</h1><p className="mt-6 text-lg leading-8 text-white/75">Replace placeholders with official clinic phone, WhatsApp, email, address, working hours, and social links.</p></div></section>
+      <section className="bg-white py-20"><div className="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-2 lg:px-8"><div><SectionTitle align="left" eyebrow="Clinic Contact" title="Premium Veterinary Clinic" description={`Led by ${clinic.leader}. ${clinic.hours}`} /><div className="grid gap-4">{[[Phone, clinic.phone], [MessageCircle, clinic.whatsapp], [Mail, clinic.email], [MapPin, clinic.address]].map(([Icon, text]) => <div key={text} className="flex items-center gap-4 rounded-3xl bg-ivory p-5 font-black text-navy shadow-soft"><Icon className="h-6 w-6 text-gold" />{text}</div>)}</div><div className="mt-6 grid gap-3 sm:grid-cols-2"><a href="tel:+200000000000" className="btn-dark"><Phone className="h-5 w-5" /> Call now</a><a href="https://wa.me/200000000000" className="btn-gold"><MessageCircle className="h-5 w-5" /> WhatsApp</a><a href="https://maps.google.com" className="btn-dark"><MapPin className="h-5 w-5" /> Get directions</a><a href="#/booking" className="btn-gold"><Calendar className="h-5 w-5" /> Book appointment</a></div><div className="mt-6 grid min-h-72 place-items-center rounded-[2rem] bg-ivory p-8 text-center shadow-soft"><MapPin className="mb-4 h-10 w-10 text-gold" /><strong className="text-navy">Google Maps embed placeholder</strong><p className="mt-2 text-slate-600">Replace with official Google Maps iframe after confirming address.</p></div></div><form onSubmit={submit} className="rounded-[2rem] bg-ivory p-6 shadow-premium"><h2 className="text-2xl font-black text-navy">Contact form</h2>{sent && <div className="mt-4 rounded-3xl bg-emerald/10 p-4 font-bold text-emerald">Message captured. Ready for API integration.</div>}<div className="mt-5 grid gap-4 md:grid-cols-2"><input className={input} required placeholder="Name" name="name" /><input className={input} required placeholder="Mobile" name="mobile" /><input className={input} type="email" placeholder="Email" name="email" /><input className={input} placeholder="Pet name" name="petName" /><select className={input} name="method"><option>Preferred contact: WhatsApp</option><option>Preferred contact: Call</option><option>Preferred contact: Email</option></select><textarea className={`${input} min-h-36 md:col-span-2`} required placeholder="Message" name="message" /></div><button className="mt-5 w-full rounded-full bg-navy px-6 py-4 font-black text-white">Send Message</button><a href="#/emergency" className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-roseEmergency px-6 py-4 font-black text-white"><HeartPulse className="h-5 w-5" /> Emergency CTA</a></form></div></section>
+    </>
+  );
+}

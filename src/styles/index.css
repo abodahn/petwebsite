@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --navy: #081827;
+  --gold: #D8B56D;
+  --emerald: #1FA77A;
+  --ivory: #FBF7EF;
+  --rose: #C2413B;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--ivory);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+button, a, input, select, textarea { font: inherit; }
+img { max-width: 100%; }
+
+@layer components {
+  .page-hero {
+    @apply relative overflow-hidden bg-navy px-4 pb-20 pt-32 text-white lg:px-8;
+    background:
+      radial-gradient(circle at 20% 25%, rgba(216,181,109,.22), transparent 28%),
+      radial-gradient(circle at 75% 10%, rgba(31,167,122,.18), transparent 34%),
+      linear-gradient(135deg, #081827 0%, #101827 50%, #182435 100%);
+  }
+  .pill-gold { @apply inline-flex items-center gap-2 rounded-full bg-gold/20 px-4 py-2 text-sm font-black text-gold; }
+  .btn-gold { @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 font-black text-navy shadow-soft transition hover:-translate-y-0.5 hover:bg-[#e6c77d]; }
+  .btn-dark { @apply inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-3 font-black text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-charcoal; }
+  .btn-glass { @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/10 px-6 py-3 font-black text-white shadow-soft backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15; }
+  .btn-emergency { @apply inline-flex items-center justify-center gap-2 rounded-full bg-roseEmergency px-6 py-3 font-black text-white shadow-soft transition hover:-translate-y-0.5; }
+}
+
+.paw-particles::before,
+.paw-particles::after {
+  content: "🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾";
+  position: absolute;
+  inset: 0;
+  color: rgba(216,181,109,.18);
+  font-size: 2rem;
+  letter-spacing: 4rem;
+  line-height: 9rem;
+  white-space: pre-wrap;
+  animation: drift 26s linear infinite;
+  pointer-events: none;
+}
+.paw-particles::after {
+  color: rgba(255,255,255,.08);
+  animation-duration: 34s;
+  transform: translateY(30%);
+}
+
+@keyframes drift {
+  from { transform: translate3d(-10%, 5%, 0) rotate(-8deg); }
+  to { transform: translate3d(10%, -15%, 0) rotate(8deg); }
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.animate-float,
+.floating-card { animation: floaty 6s ease-in-out infinite; }
+
+.emergency-pulse, .btn-emergency { position: relative; }
+.emergency-pulse::after, .btn-emergency::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 2px solid rgba(194,65,59,.38);
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(.96); opacity: .85; }
+  100% { transform: scale(1.18); opacity: 0; }
+}
+
+.heartbeat-line {
+  height: 34px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, transparent 0 8%, var(--gold) 8% 10%, transparent 10% 18%, var(--gold) 18% 22%, transparent 22% 28%, var(--gold) 28% 30%, transparent 30% 38%, var(--gold) 38% 50%, transparent 50% 100%);
+  background-size: 220px 100%;
+  animation: heartbeatMove 2.4s linear infinite;
+  opacity: .95;
+}
+@keyframes heartbeatMove {
+  from { background-position: -220px 0; }
+  to { background-position: 220px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+@media (max-width: 767px) {
+  body { padding-bottom: 72px; }
+}
